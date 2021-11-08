@@ -24,3 +24,8 @@ body{
 .div_volume{
     float:right;
 }
+canvas{
+    border:solid rgb(255, 230, 3) 3px;
+    border-radius:20px;
+    margin-top:-50px;
+}
