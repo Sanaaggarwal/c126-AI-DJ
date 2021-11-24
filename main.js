@@ -1,4 +1,5 @@
 song="";
+leftwristscore=0;
 leftwristx=0;
 rightwristx=0;
 leftwristy=0;
@@ -16,9 +17,6 @@ function setup(){
 }
 function modelloaded(){
     console.log("Posenet is Initialized");
-}
-function draw(){
-    image(video,0,0,600,500);
 }
 function play(){
     song.play();
@@ -39,5 +37,19 @@ function getposes(results){
         rightwristy=results[0].pose.rightWrist.y;
         console.log("rightwristx="+rightwristx);
         console.log("rightwristy="+rightwristy);
+        leftwristscore=results[0].pose.keypoints[9].score;
+    }
+}
+function draw(){
+    image(video,0,0,600,500);
+    fill("red");
+    stroke("red");
+    if(leftwristscore>0.2){
+        circle(leftwristx,leftwristy,20);
+        newleftwristy=Number(leftwristy);
+        removedecimals=floor(newleftwristy);
+        volume=removedecimals/500;
+        document.getElementById("volume").innerHTML="volume:"+volume;
+        song.setVolume(volume);
     }
 }
