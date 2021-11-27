@@ -1,4 +1,5 @@
 song="";
+rightwristscore=0;
 leftwristscore=0;
 leftwristx=0;
 rightwristx=0;
@@ -38,6 +39,7 @@ function getposes(results){
         console.log("rightwristx="+rightwristx);
         console.log("rightwristy="+rightwristy);
         leftwristscore=results[0].pose.keypoints[9].score;
+        rightwristscore=results[0].pose.keypoints[10].score;
     }
 }
 function draw(){
@@ -52,4 +54,27 @@ function draw(){
         document.getElementById("volume").innerHTML="volume:"+volume;
         song.setVolume(volume);
     }
+    if (rightwristscore>0.2){
+        circle(rightwristx,rightwristy,20);
+        if(rightwristx>0&rightwristx<=100){
+            song.rate(0.5);
+            document.getElementById("speed").innerHTML="speed:0.5x";
+        }
+        if(rightwristx>100&rightwristx<=200){
+            song.rate(1);
+            document.getElementById("speed").innerHTML="speed:1x";
+        }
+        if(rightwristx>200&rightwristx<=300){
+            song.rate(1.5);
+            document.getElementById("speed").innerHTML="speed:1.5x";
+        }
+        if(rightwristx>300&rightwristx<=400){
+            song.rate(2);
+            document.getElementById("speed").innerHTML="speed:2x";
+        }
+        if(rightwristx>400&rightwristx<=500){
+            song.rate(2.5);
+            document.getElementById("speed").innerHTML="speed:2.5x";
+        }
+}
 }
